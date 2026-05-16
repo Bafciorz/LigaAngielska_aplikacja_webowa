@@ -12,22 +12,37 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Liga.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a>
+                    </li>
+
+                    @if (Context.Session.GetString("Username") == "admin")
+                    {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-danger fw-bold" href="/Users/Index">🛡️ Zarządzaj użytkownikami</a>
+                        </li>
+                    }
+                </ul>
+
+                <ul class="navbar-nav">
+                    @if (Context.Session.GetString("Username") != null)
+                    {
+                        <li class="nav-item d-flex align-items-center me-3">
+                            <span class="text-muted">Zalogowany jako: <strong>@Context.Session.GetString("Username")</strong></span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="btn btn-outline-danger btn-sm" href="/IO/Wyloguj">Wyloguj się</a>
                         </li>
-                    </ul>
-                </div>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="btn btn-primary btn-sm" href="/IO/Logowanie">Zaloguj się</a>
+                        </li>
+                    }
+                </ul>
             </div>
         </nav>
     </header>
