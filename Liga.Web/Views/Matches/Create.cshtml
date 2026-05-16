@@ -1,0 +1,47 @@
+@model Liga.Web.Models.Match
+
+<div class="container mt-4" style="max-width: 600px;">
+    <div class="card shadow-sm border-0 p-4">
+        <h3 class="text-success mb-3">🗓️ Zaplanuj Nowy Mecz</h3>
+        <form method="post" action="/Matches/Create">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Data i godzina meczu</label>
+                <input type="datetime-local" name="Date" class="form-control" required />
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="form-label fw-bold">Gospodarze</label>
+                    <select name="HomeTeamId" class="form-select" required>
+                        @foreach (var team in ViewBag.Teams as List<Liga.Web.Models.Team>)
+                        {
+                            <option value="@team.TeamId">@team.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">Goście</label>
+                    <select name="AwayTeamId" class="form-select" required>
+                        @foreach (var team in ViewBag.Teams as List<Liga.Web.Models.Team>)
+                        {
+                            <option value="@team.TeamId">@team.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col">
+                    <label class="form-label fw-bold">Bramki Gospodarzy</label>
+                    <input type="number" name="HomeGoals" class="form-control" value="0" min="0" required />
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">Bramki Gości</label>
+                    <input type="number" name="AwayGoals" class="form-control" value="0" min="0" required />
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success px-4">Zapisz Mecz</button>
+                <a href="/Matches/Index" class="btn btn-secondary">Anuluj</a>
+            </div>
+        </form>
+    </div>
+</div>

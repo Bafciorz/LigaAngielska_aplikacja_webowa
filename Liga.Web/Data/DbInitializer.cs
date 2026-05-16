@@ -53,15 +53,13 @@ public static class DbInitializer
             AwayGoals = 1
         };
         context.Matches.Add(playedMatchYesterday);
-
-        context.Matches.Add(testMatch);
-        context.Matches.Add(testMatch);
+        
         context.SaveChanges(); 
 
    
         var statBruno = new PlayerStat
         {
-            MatchId = testMatch.MatchId,
+            MatchId = playedMatchYesterday.MatchId,
             PlayerId = player1.PlayerId,
             Minutes = 90,
             Goals = 2,     
@@ -72,7 +70,7 @@ public static class DbInitializer
 
         var statSalah = new PlayerStat
         {
-            MatchId = testMatch.MatchId,
+            MatchId = playedMatchYesterday.MatchId,
             PlayerId = player2.PlayerId,
             Minutes = 90,
             Goals = 1,    
@@ -88,7 +86,8 @@ public static class DbInitializer
         var admin = new User 
         { 
             Username = "admin", 
-            PasswordHash = HashPassword("Admin123!") 
+            PasswordHash = HashPassword("Admin123!"),
+            ApiKey = "admin-secret-token-2026"
         };
         
         context.Users.Add(admin);

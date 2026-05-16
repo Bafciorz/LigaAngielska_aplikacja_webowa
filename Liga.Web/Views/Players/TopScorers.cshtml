@@ -1,0 +1,58 @@
+@model IEnumerable<Liga.Web.Models.TopScorerRow>
+
+@{
+    ViewData["Title"] = "Klasyfikacja Strzelców";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>⚽ Klasyfikacja Króla Strzelców</h2>
+        <span class="badge bg-dark p-2 fs-6">Sezon 2026</span>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <table class="table table-striped table-hover text-center mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th style="width: 8%;">Pozycja</th>
+                        <th class="text-start" style="width: 35%;">Zawodnik</th>
+                        <th class="text-start" style="width: 25%;">Klub</th>
+                        <th>Mecze</th>
+                        <th>Asysty</th>
+                        <th class="fw-bold text-warning fs-5">Gole</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center py-4 text-muted">
+                                Brak zarejestrowanych bramek w rozegranych meczach.
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var row in Model)
+                        {
+                            <tr class="@(row.Position == 1 ? "table-warning fw-bold" : "")">
+                                <td class="align-middle">
+                                    @if (row.Position == 1) { <span>👑 1.</span> }
+                                    else { <span>@row.Position.</span> }
+                                </td>
+                                <td class="text-start align-middle fw-bold">@row.PlayerName</td>
+                                <td class="text-start align-middle text-muted">@row.TeamName</td>
+                                <td class="align-middle">@row.MatchesPlayed</td>
+                                <td class="align-middle text-secondary">@row.Assists</td>
+                                <td class="align-middle fw-bold text-success fs-4">
+                                    ⚽ @row.Goals
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

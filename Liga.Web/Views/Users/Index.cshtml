@@ -35,7 +35,7 @@
                             <th class="ps-4">ID</th>
                             <th>Nazwa użytkownika (Login)</th>
                             <th>Skrót hasła w bazie (SHA-256)</th>
-                            <th class="pe-4 text-end">Akcje</th>
+                            <th>🔑 Klucz/Token API (Dla konsoli)</th> <th class="pe-4 text-end">Akcje</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,8 +48,13 @@
                                         @user.Username
                                     </span>
                                 </td>
-                                <td class="align-middle text-muted" style="font-family: monospace; font-size: 0.85em;">
+                                <td class="align-middle text-muted" style="font-family: monospace; font-size: 0.85em; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                     @user.PasswordHash
+                                </td>
+                                <td class="align-middle">
+                                    <code class="bg-light p-2 rounded text-danger border fw-bold" style="font-size: 0.9em;">
+                                        @user.ApiKey
+                                    </code>
                                 </td>
                                 <td class="pe-4 align-middle text-end">
                                     <form method="post" action="/Users/Delete/@user.Id" class="d-inline" 

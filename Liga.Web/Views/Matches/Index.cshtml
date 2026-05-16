@@ -1,42 +1,49 @@
 @model IEnumerable<Liga.Web.Models.Match>
 
 <div class="container mt-4">
-    <h2>🗓️ Terminarz i Wyniki Meczów</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>🗓️ Terminarz i Wyniki Meczów</h2>
+        <a href="/Matches/Create" class="btn btn-primary">+ Zaplanuj nowy mecz</a>
+    </div>
     <div class="card shadow-sm border-0 mt-3">
         <table class="table table-striped table-hover mb-0">
             <thead class="table-dark">
-            <tr>
-                <th class="ps-4">Data</th>
-                <th class="text-end" style="width: 25%;">Gospodarze</th>
-                <th class="text-center" style="width: 15%;">Wynik</th>
-                <th class="text-start" style="width: 25%;">Goście</th>
-                <th class="pe-4 text-end" style="width: 15%;">Akcje</th> </tr>
+                <tr>
+                    <th class="ps-4">Data</th>
+                    <th class="text-end" style="width: 25%;">Gospodarze</th>
+                    <th class="text-center" style="width: 15%;">Wynik</th>
+                    <th class="text-start" style="width: 25%;">Goście</th>
+                    <th class="pe-4 text-end" style="width: 20%;">Akcje</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var match in Model)
-            {
-                <tr>
-                    <td class="ps-4 align-middle text-muted" style="font-size: 0.9em;">
-                        @match.Date.ToString("dd.MM.yyyy HH:mm")
-                    </td>
-                    <td class="text-end align-middle fw-bold">
-                        @(match.HomeTeam != null ? match.HomeTeam.Name : "Nieznany")
-                    </td>
-                    <td class="text-center align-middle">
-                        <span class="badge bg-dark px-3 py-2 fs-6">
-                            @match.HomeGoals : @match.AwayGoals
-                        </span>
-                    </td>
-                    <td class="text-start align-middle fw-bold">
-                        @(match.AwayTeam != null ? match.AwayTeam.Name : "Nieznany")
-                    </td>
-                    <td class="pe-4 align-middle text-end">
-                        <a href="/Matches/Details/@match.MatchId" class="btn btn-outline-primary btn-sm">
-                            📊 Statystyki
-                        </a>
-                    </td>
-                </tr>
-            }
+                @foreach (var match in Model)
+                {
+                    <tr>
+                        <td class="ps-4 align-middle text-muted" style="font-size: 0.9em;">
+                            @match.Date.ToString("dd.MM.yyyy HH:mm")
+                        </td>
+                        <td class="text-end align-middle fw-bold">
+                            @(match.HomeTeam != null ? match.HomeTeam.Name : "Nieznany")
+                        </td>
+                        <td class="text-center align-middle">
+                            <span class="badge bg-dark px-3 py-2 fs-6">
+                                @match.HomeGoals : @match.AwayGoals
+                            </span>
+                        </td>
+                        <td class="text-start align-middle fw-bold">
+                            @(match.AwayTeam != null ? match.AwayTeam.Name : "Nieznany")
+                        </td>
+                        <td class="pe-4 align-middle text-end">
+                            <a href="/Matches/Details/@match.MatchId" class="btn btn-outline-primary btn-sm me-1">📊 Staty</a>
+                            <a href="/Matches/Edit/@match.MatchId" class="btn btn-outline-secondary btn-sm me-1">✏️</a>
+                            <form method="post" action="/Matches/Delete/@match.MatchId" class="d-inline"
+                                  onsubmit="return confirm('Usunąć ten mecz?');">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">🗑️</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

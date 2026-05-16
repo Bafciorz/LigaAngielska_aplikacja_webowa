@@ -1,7 +1,11 @@
 @model IEnumerable<Liga.Web.Models.Team>
 
 <div class="container mt-4">
-    <h2>⚽ Drużyny</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>⚽ Drużyny zarejestrowane w rozgrywkach</h2>
+        <a href="/Teams/Create" class="btn btn-success">+ Dodaj nową drużynę</a>
+    </div>
+    
     <div class="card shadow-sm border-0 mt-3">
         <table class="table table-striped table-hover mb-0">
             <thead class="table-dark">
@@ -9,7 +13,8 @@
                 <th class="ps-4">Nazwa Drużyny</th>
                 <th>Stadion</th>
                 <th>Miasto (ze Stadionu)</th>
-                <th class="pe-4 text-end">Akcje</th> </tr>
+                <th class="pe-4 text-end" style="width: 25%;">Akcje</th>
+            </tr>
             </thead>
             <tbody>
             @foreach (var team in Model)
@@ -19,9 +24,12 @@
                     <td class="align-middle">@(team.Stadium != null ? team.Stadium.Name : "Brak")</td>
                     <td class="align-middle text-muted">@(team.Stadium != null ? team.Stadium.City : "Brak")</td>
                     <td class="pe-4 align-middle text-end">
-                        <a href="/Teams/Details/@team.TeamId" class="btn btn-outline-primary btn-sm">
-                            👥 Zawodnicy
-                        </a>
+                        <a href="/Teams/Details/@team.TeamId" class="btn btn-outline-primary btn-sm me-1">👥 Zawodnicy</a>
+                        <a href="/Teams/Edit/@team.TeamId" class="btn btn-outline-secondary btn-sm me-1">✏️ Edytuj</a>
+                        <form method="post" action="/Teams/Delete/@team.TeamId" class="d-inline"
+                              onsubmit="return confirm('Czy na pewno chcesz usunąć drużynę @team.Name?');">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">🗑️ Usuń</button>
+                        </form>
                     </td>
                 </tr>
             }

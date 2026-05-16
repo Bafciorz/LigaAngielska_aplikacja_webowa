@@ -1,13 +1,17 @@
 @model IEnumerable<Liga.Web.Models.Stadium>
 
 <div class="container mt-4">
-    <h2>🏟️ Stadiony</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>🏟️ Listy Stadionów</h2>
+        <a href="/Stadiums/Create" class="btn btn-primary">+ Dodaj nowy stadion</a>
+    </div>
     <div class="card shadow-sm border-0 mt-3">
         <table class="table table-striped table-hover mb-0">
             <thead class="table-dark">
             <tr>
                 <th class="ps-4">Nazwa Stadionu</th>
-                <th class="pe-4">Miasto</th>
+                <th>Miasto</th>
+                <th class="pe-4 text-end">Akcje</th>
             </tr>
             </thead>
             <tbody>
@@ -15,7 +19,14 @@
             {
                 <tr>
                     <td class="ps-4 align-middle fw-bold">@stadium.Name</td>
-                    <td class="pe-4 align-middle">@stadium.City</td>
+                    <td class="align-middle">@stadium.City</td>
+                    <td class="pe-4 align-middle text-end">
+                        <a href="/Stadiums/Edit/@stadium.StadiumId" class="btn btn-outline-secondary btn-sm me-1">✏️ Edytuj</a>
+                        <form method="post" action="/Stadiums/Delete/@stadium.StadiumId" class="d-inline"
+                              onsubmit="return confirm('Czy usunąć stadion @stadium.Name?');">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">🗑️ Usuń</button>
+                        </form>
+                    </td>
                 </tr>
             }
             </tbody>

@@ -1,0 +1,58 @@
+@model Liga.Web.Models.PlayerStat
+@{
+    var match = ViewBag.Match as Liga.Web.Models.Match;
+}
+
+<div class="container mt-4" style="max-width: 600px;">
+    <div class="card shadow-sm border-0 p-4">
+        <h3 class="text-success mb-2">➕ Dodaj statystyki zawodnika</h3>
+        <p class="text-muted small">Mecz: @match?.HomeTeam?.Name vs @match?.AwayTeam?.Name</p>
+        <hr />
+
+        <form method="post" action="/PlayerStats/Create">
+            <input type="hidden" name="MatchId" value="@match?.MatchId" />
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Wybierz zawodnika</label>
+                <select name="PlayerId" class="form-select" required>
+                    <option value="">-- Wybierz piłkarza z listy --</option>
+                    @foreach (var player in ViewBag.Players as List<Liga.Web.Models.Player>)
+                    {
+                        <option value="@player.PlayerId">@player.Name @player.Surname</option>
+                    }
+                </select>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="form-label fw-bold">Rozegrane minuty</label>
+                    <input type="number" name="Minutes" class="form-control" value="90" min="0" max="120" required />
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">Strzelone gole</label>
+                    <input type="number" name="Goals" class="form-control" value="0" min="0" required />
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col">
+                    <label class="form-label fw-bold">Asysty</label>
+                    <input type="number" name="Assists" class="form-control" value="0" min="0" required />
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">Żółte kartki (🟨)</label>
+                    <input type="number" name="YellowCards" class="form-control" value="0" min="0" max="2" required />
+                </div>
+                <div class="col">
+                    <label class="form-label fw-bold">Czerwone kartki (🟥)</label>
+                    <input type="number" name="RedCards" class="form-control" value="0" min="0" max="1" required />
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success px-4">Zapisz wynik</button>
+                <a href="/Matches/Details/@match?.MatchId" class="btn btn-secondary">Anuluj</a>
+            </div>
+        </form>
+    </div>
+</div>

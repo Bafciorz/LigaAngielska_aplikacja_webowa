@@ -1,0 +1,21 @@
+@model Liga.Web.Models.Stadium
+
+<div class="container mt-4" style="max-width: 500px;">
+    <div class="card shadow-sm border-0 p-4">
+        <h3 class="text-success mb-3">🏟️ Dodaj Stadion</h3>
+        <form method="post" action="/Stadiums/Create">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Nazwa stadionu</label>
+                <input type="text" name="Name" class="form-control" required />
+            </div>
+            <div class="mb-4">
+                <label class="form-label fw-bold">Miasto</label>
+                <input type="text" name="City" class="form-control" required />
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success px-4">Zapisz</button>
+                <a href="/Stadiums/Index" class="btn btn-secondary">Anuluj</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+@model Liga.Web.Models.Player
+
+<div class="container mt-4" style="max-width: 600px;">
+    <div class="card shadow-sm border-0 p-4">
+        <h2 class="mb-3 text-success">➕ Dodaj nowego zawodnika</h2>
+        <p class="text-muted">Wprowadź dane zawodnika, aby przypisać go do klubu piłkarskiego.</p>
+        <hr />
+        
+        <form method="post" action="/Players/Create">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Imię zawodnika</label>
+                <input type="text" name="Name" class="form-control" placeholder="np. Robert" required />
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label fw-bold">Nazwisko zawodnika</label>
+                <input type="text" name="Surname" class="form-control" placeholder="np. Lewandowski" required />
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label fw-bold">Pozycja na boisku</label>
+                <input type="text" name="pozycja" class="form-control" placeholder="np. Napastnik, Pomocnik, Obrońca, Bramkarz" required />
+            </div>
+            
+            <div class="mb-4">
+                <label class="form-label fw-bold">Wybierz Klub</label>
+                <select name="TeamId" class="form-select" required>
+                    <option value="">-- Wybierz drużynę z bazy danych --</option>
+                    @foreach (var team in ViewBag.Teams as List<Liga.Web.Models.Team>)
+                    {
+                        <option value="@team.TeamId">@team.Name</option>
+                    }
+                </select>
+            </div>
+            
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success px-4">Zapisz piłkarza</button>
+                <a href="/Players/Index" class="btn btn-secondary px-4">Anuluj</a>
+            </div>
+        </form>
+    </div>
+</div>
