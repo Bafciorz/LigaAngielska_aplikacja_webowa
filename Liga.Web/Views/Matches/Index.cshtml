@@ -1,0 +1,38 @@
+@model IEnumerable<Liga.Web.Models.Match>
+
+<div class="container mt-4">
+    <h2>🗓️ Terminarz i Wyniki Meczów</h2>
+    <div class="card shadow-sm border-0 mt-3">
+        <table class="table table-striped table-hover mb-0">
+            <thead class="table-dark">
+            <tr>
+                <th class="ps-4">Data</th>
+                <th class="text-end" style="width: 35%;">Gospodarze</th>
+                <th class="text-center" style="width: 15%;">Wynik</th>
+                <th class="text-start" style="width: 35%;">Goście</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var match in Model)
+            {
+                <tr>
+                    <td class="ps-4 align-middle text-muted" style="font-size: 0.9em;">
+                        @match.Date.ToString("dd.MM.yyyy HH:mm")
+                    </td>
+                    <td class="text-end align-middle fw-bold">
+                        @(match.HomeTeam != null ? match.HomeTeam.Name : "Nieznany")
+                    </td>
+                    <td class="text-center align-middle">
+                        <span class="badge bg-dark px-3 py-2 fs-6">
+                            @match.HomeGoals : @match.AwayGoals
+                        </span>
+                    </td>
+                    <td class="text-start align-middle fw-bold">
+                        @(match.AwayTeam != null ? match.AwayTeam.Name : "Nieznany")
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

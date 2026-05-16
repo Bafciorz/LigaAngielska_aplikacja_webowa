@@ -8,7 +8,8 @@ public static class DbInitializer
 {
     public static void Initialize(ApplicationDbContext context)
     {
-
+        context.Database.EnsureCreated();
+        
         if (context.Teams.Any())
         {
             return; 
@@ -27,8 +28,8 @@ public static class DbInitializer
         context.Teams.AddRange(manUtd, liverpool);
         context.SaveChanges(); 
         
-        var player1 = new Player { Name = "Bruno", Surname = "Fernandes", TeamId = manUtd.TeamId };
-        var player2 = new Player { Name = "Mohamed", Surname = "Salah", TeamId = liverpool.TeamId };
+        var player1 = new Player { Name = "Bruno", Surname = "Fernandes",pozycja = "Pomocnik", TeamId = manUtd.TeamId };
+        var player2 = new Player { Name = "Mohamed", Surname = "Salah",pozycja="Napastnik",  TeamId = liverpool.TeamId };
 
         context.Players.AddRange(player1, player2);
         
