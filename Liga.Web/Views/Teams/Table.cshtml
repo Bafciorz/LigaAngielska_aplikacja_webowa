@@ -1,0 +1,55 @@
+@model IEnumerable<Liga.Web.Models.LeagueTableRow>
+
+@{
+    ViewData["Title"] = "Tabela Ligowa";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>🏆 Oficjalna Tabela Ligi Angielskiej</h2>
+        <span class="badge bg-info p-2 fs-6">Tylko rozegrane spotkania</span>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <table class="table table-striped table-hover text-center mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th style="width: 5%;">Poz</th>
+                        <th class="text-start" style="width: 30%;">Klub</th>
+                        <th>M</th>
+                        <th>W</th>
+                        <th>R</th>
+                        <th>P</th>
+                        <th>Bramki</th>
+                        <th>+/-</th>
+                        <th class="fw-bold text-warning">Pkt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in Model)
+                    {
+                        // Wyróżnijmy lidera na złoto!
+                        <tr class="@(row.Position == 1 ? "table-warning fw-bold" : "")">
+                            <td><strong>@row.Position.</strong></td>
+                            <td class="text-start fw-bold">@row.TeamName</td>
+                            <td>@row.MatchesPlayed</td>
+                            <td class="text-success">@row.Wins</td>
+                            <td class="text-muted">@row.Draws</td>
+                            <td class="text-danger">@row.Losses</td>
+                            <td>@row.GoalsScored : @row.GoalsConceded</td>
+                            <td>
+                                <span class="@(row.GoalDifference > 0 ? "text-success" : row.GoalDifference < 0 ? "text-danger" : "text-muted")">
+                                    @(row.GoalDifference > 0 ? "+" : "")@row.GoalDifference
+                                </span>
+                            </td>
+                            <td class="fw-bold fs-5 @(row.Position == 1 ? "text-dark" : "text-primary")">
+                                @row.Points
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

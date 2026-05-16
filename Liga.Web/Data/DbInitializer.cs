@@ -34,14 +34,25 @@ public static class DbInitializer
         context.Players.AddRange(player1, player2);
         
         var testMatch = new Match
-            
         {
-            Date = DateTime.Now.AddDays(7),
+            Date = new DateTime(2026, 4, 23, 16, 0, 0),
             HomeTeamId = manUtd.TeamId,
             AwayTeamId = liverpool.TeamId,
-            HomeGoals = 1,
+            HomeGoals = 0,
+            AwayGoals = 0
+        };
+        context.Matches.Add(testMatch);
+
+       
+        var playedMatchYesterday = new Match
+        {
+            Date = new DateTime(2026, 5, 15, 20, 45, 0), 
+            HomeTeamId = manUtd.TeamId,
+            AwayTeamId = liverpool.TeamId,
+            HomeGoals = 2, 
             AwayGoals = 1
         };
+        context.Matches.Add(playedMatchYesterday);
 
         context.Matches.Add(testMatch);
         context.Matches.Add(testMatch);
@@ -53,7 +64,7 @@ public static class DbInitializer
             MatchId = testMatch.MatchId,
             PlayerId = player1.PlayerId,
             Minutes = 90,
-            Goals = 1,     
+            Goals = 2,     
             Assists = 0,
             YellowCards = 1, 
             RedCards = 0
@@ -65,7 +76,7 @@ public static class DbInitializer
             PlayerId = player2.PlayerId,
             Minutes = 90,
             Goals = 1,    
-            Assists = 1,
+            Assists = 0,
             YellowCards = 0,
             RedCards = 0
         };
