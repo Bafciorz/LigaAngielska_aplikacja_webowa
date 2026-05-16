@@ -7,10 +7,10 @@
             <thead class="table-dark">
             <tr>
                 <th class="ps-4">Data</th>
-                <th class="text-end" style="width: 35%;">Gospodarze</th>
+                <th class="text-end" style="width: 25%;">Gospodarze</th>
                 <th class="text-center" style="width: 15%;">Wynik</th>
-                <th class="text-start" style="width: 35%;">Goście</th>
-            </tr>
+                <th class="text-start" style="width: 25%;">Goście</th>
+                <th class="pe-4 text-end" style="width: 15%;">Akcje</th> </tr>
             </thead>
             <tbody>
             @foreach (var match in Model)
@@ -29,6 +29,11 @@
                     </td>
                     <td class="text-start align-middle fw-bold">
                         @(match.AwayTeam != null ? match.AwayTeam.Name : "Nieznany")
+                    </td>
+                    <td class="pe-4 align-middle text-end">
+                        <a href="/Matches/Details/@match.MatchId" class="btn btn-outline-primary btn-sm">
+                            📊 Statystyki
+                        </a>
                     </td>
                 </tr>
             }

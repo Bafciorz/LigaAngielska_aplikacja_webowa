@@ -1,0 +1,69 @@
+@model IEnumerable<Liga.Web.Models.Player>
+@{
+    var team = ViewBag.Team as Liga.Web.Models.Team;
+    ViewData["Title"] = "Skład Drużyny";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>👥 Kadra Zespołu</h2>
+        <a href="/Teams/Index" class="btn btn-secondary">← Wróć do listy drużyn</a>
+    </div>
+
+    <div class="card bg-light shadow-sm border-0 mb-5">
+        <div class="card-body p-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="text-primary fw-bold mb-1">@team?.Name</h1>
+                    <p class="text-muted mb-0">Zarejestrowani zawodnicy w rozgrywkach ligowych</p>
+                </div>
+                <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                    <span class="fs-5 d-block">Stadium: <strong>@team?.Stadium?.Name</strong></span>
+                    <span class="text-muted d-block">📍 @team?.Stadium?.City</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mb-3">🏃 Zawodnicy należący do klubu</h4>
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <table class="table table-striped table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="ps-4" style="width: 15%;">ID Zawodnika</th>
+                        <th style="width: 50%;">Imię i Nazwisko</th>
+                        <th class="pe-4" style="width: 35%;">Pozycja na boisku</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="3" class="text-center py-4 text-muted">
+                                Obecnie brak zarejestrowanych zawodników w tym klubie.
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var player in Model)
+                        {
+                            <tr>
+                                <td class="ps-4 align-middle text-muted">#@player.PlayerId</td>
+                                <td class="align-middle fw-bold fs-5">
+                                    @player.Name @player.Surname
+                                </td>
+                                <td class="pe-4 align-middle">
+                                    <span class="badge bg-secondary px-3 py-2 fs-6">
+                                        @player.pozycja
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

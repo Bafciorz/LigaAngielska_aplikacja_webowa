@@ -8,8 +8,8 @@
             <tr>
                 <th class="ps-4">Nazwa Drużyny</th>
                 <th>Stadion</th>
-                <th class="pe-4">Miasto (ze Stadionu)</th>
-            </tr>
+                <th>Miasto (ze Stadionu)</th>
+                <th class="pe-4 text-end">Akcje</th> </tr>
             </thead>
             <tbody>
             @foreach (var team in Model)
@@ -17,7 +17,12 @@
                 <tr>
                     <td class="ps-4 align-middle fw-bold">@team.Name</td>
                     <td class="align-middle">@(team.Stadium != null ? team.Stadium.Name : "Brak")</td>
-                    <td class="pe-4 align-middle text-muted">@(team.Stadium != null ? team.Stadium.City : "Brak")</td>
+                    <td class="align-middle text-muted">@(team.Stadium != null ? team.Stadium.City : "Brak")</td>
+                    <td class="pe-4 align-middle text-end">
+                        <a href="/Teams/Details/@team.TeamId" class="btn btn-outline-primary btn-sm">
+                            👥 Zawodnicy
+                        </a>
+                    </td>
                 </tr>
             }
             </tbody>

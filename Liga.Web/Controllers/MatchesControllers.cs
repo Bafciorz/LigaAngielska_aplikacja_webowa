@@ -19,13 +19,37 @@ public class MatchesController : Controller
         {
             return RedirectToAction("Logowanie", "IO");
         }
-
-        // Tutaj musimy zaimportować dwa razy tabelę Team (dla gospodarzy i gości)
+        
         var matches = _context.Matches
             .Include(m => m.HomeTeam)
             .Include(m => m.AwayTeam)
             .ToList();
 
         return View(matches);
+    }
+
+    public IActionResult Details(int id)
+    {
+        if (HttpContext.Session.GetString("Username") == null)
+        {
+            return RedirectToAction("Logowanie", "IO");
+        }
+        
+        var match = _context.Matches
+            .Include(m => m.HomeTeam)
+            .Include(m => m.AwayTeam)
+            .FirstOrDefault(m => m.MatchId == id);
+
+        if (match == null)
+        {
+            return RedirectToAction("Index");
+        }
+        var playerStats = _context.PlayerStats
+            .Include(ps => ps.Player)
+            .ThenInclude(ps =>  ps.Team)
+            .Where(ps => ps.MatchId == id)
+            .ToList();
+        ViewBag.Match =  match;
+        return View(playerStats);
     }
 }

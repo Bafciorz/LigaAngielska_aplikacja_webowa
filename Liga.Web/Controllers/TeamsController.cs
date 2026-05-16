@@ -25,4 +25,29 @@ public class TeamsController:Controller
             ToList();
         return View(teams);
     }
+    
+    public IActionResult Details(int id)
+    {
+  
+        if (HttpContext.Session.GetString("Username") == null)
+        {
+            return RedirectToAction("Logowanie", "IO");
+        }
+
+        var team = _context.Teams
+            .Include(t => t.Stadium)
+            .FirstOrDefault(t => t.TeamId == id);
+
+        if (team == null)
+        {
+            return RedirectToAction("Index"); 
+        }
+
+        var players = _context.Players
+            .Where(p => p.TeamId == id)
+            .ToList();
+
+        ViewBag.Team = team;
+        return View(players);
+    }
 }

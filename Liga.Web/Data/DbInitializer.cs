@@ -39,11 +39,39 @@ public static class DbInitializer
             Date = DateTime.Now.AddDays(7),
             HomeTeamId = manUtd.TeamId,
             AwayTeamId = liverpool.TeamId,
-            HomeGoals = 0,
-            AwayGoals = 0
+            HomeGoals = 1,
+            AwayGoals = 1
         };
 
         context.Matches.Add(testMatch);
+        context.Matches.Add(testMatch);
+        context.SaveChanges(); 
+
+   
+        var statBruno = new PlayerStat
+        {
+            MatchId = testMatch.MatchId,
+            PlayerId = player1.PlayerId,
+            Minutes = 90,
+            Goals = 1,     
+            Assists = 0,
+            YellowCards = 1, 
+            RedCards = 0
+        };
+
+        var statSalah = new PlayerStat
+        {
+            MatchId = testMatch.MatchId,
+            PlayerId = player2.PlayerId,
+            Minutes = 90,
+            Goals = 1,    
+            Assists = 1,
+            YellowCards = 0,
+            RedCards = 0
+        };
+
+        context.PlayerStats.AddRange(statBruno, statSalah);
+        
 
     
         var admin = new User 
