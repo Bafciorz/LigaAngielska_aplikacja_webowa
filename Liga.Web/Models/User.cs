@@ -9,7 +9,7 @@ public class User
     [Required]
     public string Username { get; set; } = "";
     [Required]
-    public string PasswordHash { get; set; } = ""; // Przechowywane jako skrót
-    public string Role { get; set; } = "User"; // Np. Admin lub User
-    public string ApiKey { get; set; } = Guid.NewGuid().ToString(); // Do REST API
+    public string PasswordHash { get; set; } = ""; 
+    public string Role { get; set; } = "User"; 
+    public string ApiKey { get; set; } = Guid.NewGuid().ToString();
 }

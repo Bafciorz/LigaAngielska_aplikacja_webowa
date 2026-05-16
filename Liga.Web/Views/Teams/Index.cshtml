@@ -1,0 +1,26 @@
+@model IEnumerable<Liga.Web.Models.Team>
+
+<div class="container mt-4">
+    <h2>⚽ Drużyny</h2>
+    <div class="card shadow-sm border-0 mt-3">
+        <table class="table table-striped table-hover mb-0">
+            <thead class="table-dark">
+            <tr>
+                <th class="ps-4">Nazwa Drużyny</th>
+                <th>Stadion</th>
+                <th class="pe-4">Miasto (ze Stadionu)</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var team in Model)
+            {
+                <tr>
+                    <td class="ps-4 align-middle fw-bold">@team.Name</td>
+                    <td class="align-middle">@(team.Stadium != null ? team.Stadium.Name : "Brak")</td>
+                    <td class="pe-4 align-middle text-muted">@(team.Stadium != null ? team.Stadium.City : "Brak")</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

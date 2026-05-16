@@ -56,15 +56,12 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
-        // Pobieramy nasz kontekst bazy danych z kontenera wstrzykiwania zależności
         var context = services.GetRequiredService<ApplicationDbContext>();
         
-        // Uruchamiamy naszą klasę i przekazujemy jej kontekst
         DbInitializer.Initialize(context);
     }
     catch (Exception ex)
     {
-        // Jeśli coś pójdzie nie tak (np. błąd w SQL), zaloguj błąd w konsoli
         var logger = services.GetRequiredService<ILogger<Program>>();
         logger.LogError(ex, "Wystąpił krytyczny błąd podczas seedowania bazy danych.");
     }

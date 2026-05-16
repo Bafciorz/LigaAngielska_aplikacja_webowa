@@ -24,6 +24,12 @@
                             <a class="nav-link text-danger fw-bold" href="/Users/Index">🛡️ Zarządzaj użytkownikami</a>
                         </li>
                     }
+                    @if (Context.Session.GetString("Username") != null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Teams/Index">⚽ Drużyny</a>
+                        </li>
+                    }
                 </ul>
 
                 <ul class="navbar-nav">
