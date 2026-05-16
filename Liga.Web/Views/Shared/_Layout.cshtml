@@ -17,19 +17,29 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a>
                     </li>
-
+                    
+                    @if (Context.Session.GetString("Username") != null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Stadiums/Index">🏟️ Stadiony</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Teams/Index">⚽ Drużyny</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Players/Index">🏃 Zawodnicy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Matches/Index">🗓️ Mecze</a>
+                        </li>
+                    }
                     @if (Context.Session.GetString("Username") == "admin")
                     {
                         <li class="nav-item">
                             <a class="nav-link text-danger fw-bold" href="/Users/Index">🛡️ Zarządzaj użytkownikami</a>
                         </li>
                     }
-                    @if (Context.Session.GetString("Username") != null)
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/Teams/Index">⚽ Drużyny</a>
-                        </li>
-                    }
+                    
                 </ul>
 
                 <ul class="navbar-nav">

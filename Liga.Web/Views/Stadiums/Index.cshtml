@@ -1,0 +1,24 @@
+@model IEnumerable<Liga.Web.Models.Stadium>
+
+<div class="container mt-4">
+    <h2>🏟️ Stadiony</h2>
+    <div class="card shadow-sm border-0 mt-3">
+        <table class="table table-striped table-hover mb-0">
+            <thead class="table-dark">
+            <tr>
+                <th class="ps-4">Nazwa Stadionu</th>
+                <th class="pe-4">Miasto</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var stadium in Model)
+            {
+                <tr>
+                    <td class="ps-4 align-middle fw-bold">@stadium.Name</td>
+                    <td class="pe-4 align-middle">@stadium.City</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
